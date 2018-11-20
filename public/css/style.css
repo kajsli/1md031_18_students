@@ -1,0 +1,38 @@
+body {
+    font-family: Calibri;
+}
+
+.heading {
+  text-align:center;
+  margin: 1px 2px 3px 4px;
+
+}
+.rubrik {
+    position: absolute;
+    top : 50px;
+    left :400px;
+}
+
+.Burgare {
+    color: #FFFFFF;
+    text-transform: weight:bold;
+    background-color: #000000;
+    text-align: center;
+    margin: 1px 2px 3px 4px;
+    border: 2px dotted #FFFFFF;
+}
+
+.Kund{
+    color: #696969;
+    text-align: center;
+    margin: 1px 2px 3px 4px;
+    border: 2px dotted #696969;
+  }
+
+button:hover {
+    background-color: ##FF00FF;
+}
+
+table {
+    width:100vw;
+}
