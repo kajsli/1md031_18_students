@@ -37,6 +37,8 @@ var burgerOrdering = new Vue({
     //items: menu,
     menu: food,
     orders: {},
+    details: {x:0, y:0},
+    lastorder: 0
   },
   created: function () {
     socket.on('initialize', function (data) {
@@ -53,22 +55,28 @@ var burgerOrdering = new Vue({
           //Add some functionality
       },
       getNext: function () {
-        var lastOrder = Object.keys(this.orders).reduce(function (last, next) {
-          return Math.max(last, next);
-        }, 0);
-        return lastOrder + 1;
+        this.lastorder = this.lastorder + 1
+        return this.lastorder;
+
       },
       addOrder: function (event) {
+        if (this.burgerChoice.length !==0){
         console.log("clicked");
-        var offset = {x: event.currentTarget.getBoundingClientRect().left,
-                      y: event.currentTarget.getBoundingClientRect().top};
         socket.emit("addOrder", { orderId: this.getNext(),
-                                  details: { x: event.clientX - 10 - offset.x,
-                                             y: event.clientY - 10 - offset.y },
-                                  orderItems: ["Beans", "Curry"]
+                                  details: this.details,
+                                  orderItems: this.burgerChoice,
                                 });
-      }
-      //displayOrder: function (event) {
-  //}
+                              }
+    },
+
+    displayOrder: function (event) {
+      console.log("clicked");
+      var offset = {x: event.currentTarget.getBoundingClientRect().left,
+                    y: event.currentTarget.getBoundingClientRect().top};
+      this.details = { x: event.clientX - 10 - offset.x,
+                y: event.clientY - 10 - offset.y }
+
 }
-})
+}
+});
+//"Worcestershire burger", "Beetroot burger", "Chickpea burger"
